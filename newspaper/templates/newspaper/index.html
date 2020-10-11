@@ -1,0 +1,180 @@
+{% extends 'newspaper/layout.html' %}
+{% load static %}
+
+    {% block search %}
+    <div id="sidebar" class="sidebar">
+        <a href="#" class="boton-cerrar" onclick="ocultar()">×</a>
+        <ul class="menu">
+            <li class="nav-item">
+                <a class="category nav-link" href="/category/business">Business</a>
+                <a class="category nav-link" href="/category/entertainment">Entertainment</a>
+                <a class="category nav-link" href="/category/general">General</a>
+                <a class="category nav-link" href="/category/health">Health</a>
+                <a class="category nav-link" href="/category/science">Science</a>
+                <a class="category nav-link" href="/category/sports">Sports</a>
+                <a class="category nav-link" href="/category/technology">Technology</a>
+            </li>
+        </ul>
+        <ul class="search navbar-nav mr-auto">
+            <form class="form-inline my-2 my-lg-0" method="post">
+                {% csrf_token %}
+                {{form.item}}
+                <button class="btn btn-outline-dark my-2 my-sm-1" type="submit"><span class="fa fa-search" style="margin-right: 4px;"></span>Search</button>
+            </form>
+        </ul>
+    </div>
+    <div id="contenido">
+        <a class="icon abrir-cerrar" href="javascript:void(0)" onclick="mostrar()"><i style="color: black;" class="fa fa-navicon"></i></a>
+    </div>
+
+    <div>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a style="color: white;" href="{% url 'contact' %}" class="btn btn-dark">Contact</a>   
+            </li>
+            <li class="nav-item">
+                <a id="today" class="nav-link disabled" href="#">{{today}}</a>
+            </li>
+        </ul>
+    </div>
+    {% endblock %}
+
+    {% block header %}
+        <section id="bot-nav">
+            <section id="blogs">
+                <div class="row"> 
+                {% for blog in apiNewsInglaterra.articles %}
+                    <div class="col-lg-2 col-md-3" style="border-right: 1px solid #dbdbdb; width: 280px">
+                        {% if blog.urlToImage %}
+                        <a href="{{blog.urlToImage}}" target="_blank"><img class="img-shadow blog-photo img-fluid" src="{{blog.urlToImage}}"></a>
+                        {% endif %}
+                        <p class="blog-title"><a class="blog-anchor" href="{{blog.url}}" target="_blank"><strong>{{blog.title |slice:":20"}}...</strong></a></p>
+                        <p class="blog-description">{{blog.description|slice:":30"}}...</p>
+                    </div>
+                {% endfor %}
+                    <div class="col-lg-2 col-md-6" style="width:200px; border-right: 1px solid #dbdbdb">
+                        <img class="time-foto img-fluid" height="30%" width="30%" title="{{description}}" src="http://openweathermap.org/img/wn/{{img}}@2x.png" />
+                        <p class="time"><strong>{{temp}}°C</strong></p>
+                        <p class="time-city">Crespo, Argentina</p>
+                    </div>
+                    <div class="col-lg-2 col-md-6" style="width:200px;">
+                        <img class="covid-foto img-fluid" title="Covid in Argentina" src="https://contenidosclick.es/wp-content/uploads/2020/03/consejos-contra-el-coronavirus.png" />
+                        <p class="time"><strong>Active: {{total_covid}}</strong></p>
+                        <p class="time-city">Argentina</p>
+                    </div>
+                </div>
+                <hr style="border: solid 1px black; margin-top:6px;">
+            </section>
+
+        </section>
+    {% endblock %}
+
+    {% block body %}
+    <section id="principal-section">
+        <div>
+            <ol>
+                <div class="row">
+                    {% for new in apiNewsPrincipal.articles %}
+                    <li class="col-lg-12 col-xl-4 col-sm-12 col-md-12" >
+                        <article id="principal-article">
+                            {% if new.urlToImage != null %}
+                                <a href="{{new.url}}" target="_blank"><img class="img-shadow secondary-img img-responsive" src="{{new.urlToImage}}"></a>
+                            {% endif %}
+                            <div>
+                                <p class="categ">{{new.source.name}}</p>
+                                <p class="title">{{new.title}}</p>
+                                <p class="content">{{new.description}}</p>
+                                <p class="date">{{new.publishedAt}}</p>
+                            </div>
+                        </article>
+                    </li>
+                    {% endfor %}
+                <hr class="hr" style="border: 1px solid black">
+                </div>
+            </ol>
+        </div>
+    </section>
+
+    <section id="section-bottom">
+        <ul id="nav-search" class="nav nav-tabs">
+            <li class="nav-item">
+            <a class="nav-link active recent">The most recent in the World</a>
+            </li>
+        </ul>
+
+        <section class="news-bottom">
+            <div class="row">
+                {% for new in apiNewsWorld.articles %}
+                <div  class="col-lg-12">
+                        <div class="last-news" style="float: left;">
+                            <p class="categ">{{new.source.name}}</p>
+                            <p class="title">{{new.title}}</p>
+                            <p class="content">{{new.description}}</p>
+                            <p class="date">{{new.publishedAt}}</p>
+                        </div>
+                        <div>
+                            <a href="{{new.url}}"><img style="float:right; width:40%; height: 40%;" class="img-shadow img-fluid" src="{{new.urlToImage}}" /></a>
+                        </div>
+                </div>
+                <hr class="hr">
+                {% endfor %}
+            </div>
+        </section>
+    </section>
+
+    <footer class="fixed-bottom">
+        <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+            <a class="btn" href="{% url 'allnews' %}">All News</a>
+        </nav>
+    </footer>
+
+    <script>
+    var x = window.matchMedia("(max-width: 1024px)")
+
+    function mostrar() {
+        function querie(x){
+            let sidebar = document.getElementById('sidebar')
+            if (x.matches){
+                sidebar.style.width = "100%";
+            }
+            else{
+                sidebar.style.width = "280px";
+                sidebar.classList.add('abierto')
+            }
+        }
+
+        querie(x)
+        x.addListener(querie)
+    }
+
+    function ocultar() {
+        document.getElementById("sidebar").style.width = "0";
+        document.getElementById("contenido").style.marginLeft = "0";
+        sidebar.classList.remove('abierto')
+    }
+
+    function querie(x){
+        if (x.matches){
+            document.getElementById("sidebar").style.width = "100%";
+        }
+    }
+
+    window.addEventListener('click', function(e){   
+        let sidebar = document.getElementById('sidebar')
+        let abierto = sidebar.classList.contains('abierto')
+        let adentro = sidebar.contains(e.target)
+        let abrir = document.getElementById('contenido')
+        let clickMenu = abrir.contains(e.target)
+        
+        if(abierto){
+            if(adentro === true){
+                return
+            }if(adentro === false && clickMenu === false){
+                ocultar()
+                sidebar.classList.remove('abierto')
+            }
+        }
+    });
+    </script>
+{% endblock %}
+

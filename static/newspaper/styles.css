@@ -1,0 +1,56 @@
+.title{
+    font-size:22px;
+}
+
+.content{
+    font-size:18px;
+    color:#787878;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.date{
+    font-size:14px;
+}
+
+.category{
+    font-size:14px;
+}
+
+.city{
+    font-size: 16px;
+}
+
+.newspaper{
+    margin:0px;
+    font-size:40px;
+    color:black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.newspaper:hover{
+    color:black;
+    text-decoration: inherit;
+}
+
+.anchor{
+    font-size: 14px;
+    color:black;
+}
+
+.anchor:hover{
+    color:black;
+    text-decoration:inherit;
+    background-color: #f7f7f7;
+}
+
+.anchor-title{
+    font-size: 24px;
+    color:black;
+}
+
+.anchor-title:hover{
+    color:#ababab;
+    text-decoration:inherit;
+}
+
+

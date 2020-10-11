@@ -1,0 +1,28 @@
+{% extends 'newspaper/layout.html' %}
+
+{% block body %}
+<div class="container">
+    <form method="post" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <div class="input-group" style="margin-bottom: 20px;">
+            <div class="input-group-prepend">
+              <span class="span input-group-text" id="">First and last name</span>
+            </div>
+            <input type="text" name="first_name" placeholder="First Name" class="input form-control" required>
+            <input style="margin-left:4px;" type="text" name="last_name" placeholder="Last Name" class="input form-control" required>
+        </div>
+        <div class="input-group mb-3" style="margin-bottom: 20px;">
+            <div class="input-group-prepend">
+              <span class="span input-group-text">Email</span>
+            </div>
+            <input name="email" placeholder="Email" type="email" class="input form-control" required>
+          </div>
+       
+        <div class="text-center">
+            <textarea name="message" class="input form-control" placeholder="Message" rows="18" cols="156" style="margin-bottom: 30px;" required></textarea>
+            <input type="submit" value="Submit" class="btn btn-dark" />
+        </div>
+      </form>
+</div>
+
+{% endblock %}

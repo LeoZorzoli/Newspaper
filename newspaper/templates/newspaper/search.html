@@ -1,0 +1,28 @@
+{% extends 'newspaper/layout.html' %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        {% for new in apiNewsSearched.articles %}
+        <section style="margin-left: 2%; margin-right: 2%;">
+            <div style="width: 80%;">
+                <p class="category-page">{{category}}</p>
+                <p class="title-page"><strong>{{new.title}}</strong></p>
+                <p class="description-page">{{new.description}}</p>
+            </div>
+            {% if new.urlToImage %}
+            <div style="width: 100%;">
+                <a href="{{new.url}}" target="_blank"><img class="img-fluid" src="{{new.urlToImage}}" /></a>
+            </div>
+            {% endif %}
+            <div style="width: 80%;">
+                <p class="date"><p class="date">{{new.publishedAt}}</p></p>
+            </div>
+            <hr style="border: solid black 1px; margin-right: 18%;">
+        </section>
+        {% endfor %}
+    </div>
+<div>
+
+{% endblock %}

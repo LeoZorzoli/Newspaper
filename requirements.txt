@@ -1,0 +1,5 @@
+django==2.2.13
+django-heroku
+requests==2.24.0
+gunicorn==19.9.0
+psycopg2
