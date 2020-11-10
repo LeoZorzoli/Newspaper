@@ -29,18 +29,17 @@
     .content{
         font-size: 50px;
     }
-
     
     .date{
-        font-size:26px;
-    }
-
-    .city{
-        font-size: 30px;
+        font-size:24px;
     }
 
     .categ{
         font-size: 26px;
+    }
+
+    .title{
+        font-size: 40px;
     }
 
     .category:hover{
@@ -301,7 +300,6 @@
     .sidebar a:hover{
         color:grey;
         background-color:#f5f5f5;
-
     }
 
     #contenido {
@@ -397,9 +395,9 @@
 
 /* NEWS */
 #principal-section{
-    margin-left: 10%;
+    margin-left: 9%;
     margin-top: 20px;
-    margin-right: 10%;
+    margin-right: 11%;
 }
 
 #secundary-section{
@@ -485,7 +483,24 @@ li{
     height: 340px;
 }
 
-
 .img-shadow:hover{
     box-shadow: 6px 6px 5px -2px #dbdbdb;
+}
+
+.new{
+    padding: 20px;
+    border: 1px solid #e6e6e6;
+}
+
+.new-link{
+    color: black !important;
+}
+
+.new-link:hover{
+    color: #363636 !important;
+    text-decoration: none;
+}
+
+.date{
+    text-align: right;
 }

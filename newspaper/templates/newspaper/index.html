@@ -75,15 +75,17 @@
             <ol>
                 <div class="row">
                     {% for new in apiNewsPrincipal.articles %}
-                    <li class="col-lg-12 col-xl-4 col-sm-12 col-md-12" >
+                    <li class="col-lg-12 col-xl-4 col-sm-12 col-md-12 new" >
                         <article id="principal-article">
                             {% if new.urlToImage != null %}
-                                <a href="{{new.url}}" target="_blank"><img class="img-shadow secondary-img img-responsive" src="{{new.urlToImage}}"></a>
+                                <a href="{{new.url}}" target="_blank"><img class="img-shadow secondary-img img-responsive" alt="{{new.title}}" src="{{new.urlToImage}}"></a>
                             {% endif %}
                             <div>
                                 <p class="categ">{{new.source.name}}</p>
-                                <p class="title">{{new.title}}</p>
+                                <p class="title"><strong><a class="new-link" href="{{new.url}}">{{new.title}}</a></strong></p>
+                                {% if new.description != None %}
                                 <p class="content">{{new.description}}</p>
+                                {% endif %}
                                 <p class="date">{{new.publishedAt}}</p>
                             </div>
                         </article>
@@ -108,12 +110,12 @@
                 <div  class="col-lg-12">
                         <div class="last-news" style="float: left;">
                             <p class="categ">{{new.source.name}}</p>
-                            <p class="title">{{new.title}}</p>
+                            <p class="title"><strong>{{new.title}}</strong></p>
                             <p class="content">{{new.description}}</p>
                             <p class="date">{{new.publishedAt}}</p>
                         </div>
                         <div>
-                            <a href="{{new.url}}"><img style="float:right; width:40%; height: 40%;" class="img-shadow img-fluid" src="{{new.urlToImage}}" /></a>
+                            <a href="{{new.url}}"><img style="float:right; width:40%; height: 40%;" class=" img-fluid" src="{{new.urlToImage}}" /></a>
                         </div>
                 </div>
                 <hr class="hr">
